@@ -3,8 +3,7 @@ terraform {
     bucket = "rf-state-lock-824709318323-ap-southeast-1"
     key    = "terraform/state/cicd-pipeline-on-aws.json"
     dynamodb_table = "tf-state-lock-dynamo"
-    region = "us-southeast-1"
-    profile = "default"
+    region = "ap-southeast-1"
   }
 
   required_providers {
