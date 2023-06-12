@@ -1,4 +1,4 @@
-name: Build Terrafrom Resource
+name: Terraform Plan/Apply
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
     inputs:
       plan_type:
-        description: Terrafrom Plan Deploy for Destroy
+        description: Terrafrom Plan Deploy or Destroy
         default: deploy
         required: true
         type: string
@@ -65,7 +65,12 @@ jobs:
         id: tf-plan
         run: |
           export exitcode=0
-          terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
+
+          if [ $plan_type -eq destroy ]; then
+            terraform plan -destroy -detailed-exitcode -no-color -out tfplan || export exitcode=$?
+          else 
+            terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
+          fi
 
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
 
