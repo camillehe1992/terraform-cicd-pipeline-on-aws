@@ -24,9 +24,7 @@ module "lambda_function" {
   runtime       = "python3.8"
 
   source_path = "./src/hello-world"
-  environment_variables = {
-    AWS_REGION = "cn-north-1"
-  }
+
   tags = {
     Name = "hello-world"
   }
