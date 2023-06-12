@@ -2,17 +2,11 @@ name: Terraform Plan/Apply
 
 on:
   push:
-    branches: ["main"]
-  workflow_dispatch:
-    inputs:
-      plan_type:
-        description: Terrafrom Plan Deploy or Destroy
-        default: deploy
-        required: true
-        type: string
-        options:
-          - deploy
-          - destroy
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -65,14 +59,7 @@ jobs:
         id: tf-plan
         run: |
           export exitcode=0
-          echo The plan_type is ${{ inputs.plan_type }}
-
-          if [ ${{ inputs.plan_type }} -eq "destroy" ]; then
-            echo "THIS IS A DESTROY ACTION !!!"
-            terraform plan -destroy -detailed-exitcode -no-color -out tfplan || export exitcode=$?
-          else 
-            terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
-          fi
+          terraform plan -detailed-exitcode -no-color -out tfplan || export exitcode=$?
 
           echo "exitcode=$exitcode" >> $GITHUB_OUTPUT
 
