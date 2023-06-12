@@ -23,7 +23,7 @@ module "lambda_function" {
   handler       = "index.lambda_handler"
   runtime       = "python3.8"
 
-  source_path = "../src/hello-world"
+  source_path = "../../src/hello-world"
   environment_variables = {
     AWS_REGION = "cn-north-1"
   }
