@@ -2,7 +2,7 @@ terraform {
   backend "s3" {
     bucket         = "hyc-tf-state-281167210162-cn-north-1"
     key            = "terraform/state/cicd-pipeline-on-aws.json"
-    dynamodb_table = "tf-state-lock-dynamo"
+    dynamodb_table = "hyc-tf-state-281167210162-cn-north-1-table"
     region         = "cn-north-1"
   }
 
