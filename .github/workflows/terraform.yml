@@ -36,20 +36,20 @@ jobs:
 
       - name: Terraform fmt
         id: fmt
-        run: terraform fmt -check >> $GITHUB_OUTPUT
+        run: terraform fmt -check
         continue-on-error: true
 
       - name: Terraform Init
         id: init
-        run: terraform init >> $GITHUB_OUTPUT
+        run: terraform init
 
       - name: Terraform Validate
         id: validate
-        run: terraform validate -no-color >> $GITHUB_OUTPUT
+        run: terraform validate -no-color
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -no-color >> $GITHUB_OUTPUT
+        run: terraform plan -no-color
         continue-on-error: true
 
       - name: Print Output
