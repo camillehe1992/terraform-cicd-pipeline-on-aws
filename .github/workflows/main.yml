@@ -1,16 +1,25 @@
-name: "Deploy Terrafrom Resource"
+name: Build Terrafrom Resource
 
 on:
   push:
     branches: ["main"]
-  pull_request:
+  workflow_dispatch:
+    inputs:
+      plan_type:
+        description: Terrafrom Plan Deploy for Destroy
+        default: deploy
+        required: true
+        type: string
+        options:
+          - deploy
+          - destroy
 
 permissions:
   contents: read
 
 jobs:
   tf_code_check:
-    name: Terraform Validation and Build
+    name: Validation and Build
     runs-on: ubuntu-latest
     environment: development
 
@@ -48,13 +57,31 @@ jobs:
         run: terraform validate -no-color
 
       - name: Terraform Plan Deploy
+        if: ${{ inputs.plan_type }} == "deploy"
         id: plan
         run: terraform plan -no-color -out "tfplan"
         continue-on-error: true
 
+      - name: Terraform Plan Destroy
+        if: ${{ inputs.plan_type }} == "destroy"
+        id: plan
+        run: terraform plan -destroy -no-color -out "tfplan"
+        continue-on-error: true
+
+  tf_code_apply:
+    name: Apply
+    runs-on: ubuntu-latest
+    environment: development
+
+    # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud".
       # See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == "refs/heads/main" && github.event_name == "push"
         run: terraform apply "tfplan"
