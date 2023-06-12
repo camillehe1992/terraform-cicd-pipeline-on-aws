@@ -58,13 +58,13 @@ jobs:
 
       - name: Terraform Plan Deploy
         if: ${{ inputs.plan_type }} == "deploy"
-        id: plan
+        id: plan_deploy
         run: terraform plan -no-color -out "tfplan"
         continue-on-error: true
 
       - name: Terraform Plan Destroy
         if: ${{ inputs.plan_type }} == "destroy"
-        id: plan
+        id: plan_destroy
         run: terraform plan -destroy -no-color -out "tfplan"
         continue-on-error: true
 
@@ -84,4 +84,5 @@ jobs:
       # See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
       - name: Terraform Apply
         if: github.ref == "refs/heads/main" && github.event_name == "push"
+        id: apply
         run: terraform apply "tfplan"
