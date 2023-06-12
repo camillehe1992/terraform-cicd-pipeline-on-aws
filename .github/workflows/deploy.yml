@@ -1,4 +1,4 @@
-name: "Terraform"
+name: "Deploy Terrafrom Resource"
 
 on:
   push:
