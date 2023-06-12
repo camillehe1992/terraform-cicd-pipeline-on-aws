@@ -15,7 +15,8 @@ terraform {
 }
 
 module "lambda_function" {
-  source = "terraform-aws-modules/lambda/aws"
+  source  = "terraform-aws-modules/lambda/aws"
+  version = "5.0.0"
 
   function_name = "hello-world-tf"
   description   = "My awesome lambda function deployed by Terrafrom"
