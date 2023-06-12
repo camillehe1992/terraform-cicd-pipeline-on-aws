@@ -69,6 +69,7 @@ jobs:
         continue-on-error: true
 
   tf_code_apply:
+    needs: [tf_code_check]
     name: Apply
     runs-on: ubuntu-latest
     environment: development
