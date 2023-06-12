@@ -1,9 +1,9 @@
 terraform {
   backend "s3" {
-    bucket         = "rf-state-lock-824709318323-ap-southeast-1"
+    bucket         = "hyc-tf-state-281167210162-cn-north-1"
     key            = "terraform/state/cicd-pipeline-on-aws.json"
     dynamodb_table = "tf-state-lock-dynamo"
-    region         = "ap-southeast-1"
+    region         = "cn-north-1"
   }
 
   required_providers {
