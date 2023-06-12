@@ -14,7 +14,19 @@ terraform {
   }
 }
 
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "4.0.1"
+module "lambda_function" {
+  source = "terraform-aws-modules/lambda/aws"
+
+  function_name = "hello-world-tf"
+  description   = "My awesome lambda function deployed by Terrafrom"
+  handler       = "index.lambda_handler"
+  runtime       = "python3.8"
+
+  source_path = "../src/hello-world"
+  environment_variables = {
+    AWS_REGION = "cn-north-1"
+  }
+  tags = {
+    Name = "hello-world"
+  }
 }
