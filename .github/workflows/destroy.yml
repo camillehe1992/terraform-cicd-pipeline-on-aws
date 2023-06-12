@@ -47,9 +47,9 @@ jobs:
         id: validate
         run: terraform validate -no-color
 
-      - name: Terraform Plan
+      - name: Terraform Plan Destroy
         id: plan
-        run: terraform plan -no-color -out "tfplan"
+        run: terraform plan -destroy -no-color -out "tfplan"
         continue-on-error: true
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
