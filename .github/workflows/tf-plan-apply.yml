@@ -65,6 +65,7 @@ jobs:
         id: tf-plan
         run: |
           export exitcode=0
+          echo The plan_type is ${{ inputs.plan_type }}
 
           if [ ${{ inputs.plan_type }} -eq "destroy" ]; then
             echo "THIS IS A DESTROY ACTION !!!"
