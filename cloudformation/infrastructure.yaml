@@ -26,11 +26,11 @@ Resources:
     Properties:
       AttributeDefinitions:
         - 
-          AttributeName: LockId
+          AttributeName: LockID
           AttributeType: S
       KeySchema:
         - 
-          AttributeName: LockId
+          AttributeName: LockID
           KeyType: HASH
       ProvisionedThroughput: 
         ReadCapacityUnits: 5
