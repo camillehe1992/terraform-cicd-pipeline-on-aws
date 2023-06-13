@@ -20,13 +20,9 @@ provider "aws" {
   profile = var.aws_profile
 }
 
-# A simple CloudWatch Log group
-# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group
-resource "aws_cloudwatch_log_group" "yada" {
-  name = "Yada"
-
-  tags = {
-    Environment = "production"
-    Application = "serviceA"
-  }
+# A simple SNS topic resources 
+# https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic
+resource "aws_sns_topic" "user_updates" {
+  name              = "user-updates-topic"
+  kms_master_key_id = "alias/aws/sns"
 }
