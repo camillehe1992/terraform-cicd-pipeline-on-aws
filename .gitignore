@@ -127,3 +127,16 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# VScode
+
+.DS_Store
+.vscode/
+/**/.DS_Store
+
+# Pycharm
+.idea/
+# terraform modules, states and plan
+**/terraform.tfstate.*.backup
+**/.terraform
+**/tfplan
