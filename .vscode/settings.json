@@ -1,4 +1,16 @@
 {
   "editor.formatOnPaste": true,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "yaml.customTags": [
+  "!Equals sequence",
+  "!FindInMap sequence",
+  "!GetAtt",
+  "!GetAZs",
+  "!ImportValue",
+  "!Join sequence",
+  "!Ref",
+  "!Select sequence",
+  "!Split sequence",
+  "!Sub"
+]
 }

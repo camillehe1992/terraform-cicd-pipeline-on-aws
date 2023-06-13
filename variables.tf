@@ -8,6 +8,6 @@ variable "aws_region" {
 
 variable "aws_profile" {
   type        = string
-  default     = "281167210162_UserFull"
+  default     = "756143471679_UserFull"
   description = "AWS profile which is used for the deployment"
 }

@@ -1,9 +1,16 @@
 BASE := $(shell /bin/pwd)
 TF ?= terraform
+AWS ?= aws
+
+export AWS_PROFILE=756143471679_UserFull
 
 target:
 	$(info ${HELP_MESSAGE})
 	@exit 0
+
+create-stack:
+	$(info [*] Create Infrastructure using AWS CLI)
+	@$(AWS) cloudformation create-stack --stack-name terraform-infrastructure --template-body file://cloudformation/infrastructure.yaml
 
 init:
 	$(info [*] Terraform Init)

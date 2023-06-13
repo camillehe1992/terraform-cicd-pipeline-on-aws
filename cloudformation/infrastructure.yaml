@@ -1,0 +1,41 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: Build Infrastructure resources for persisting Terrafrom state files
+
+Parameters:
+  prefix:
+    Description: The prefix of identifier
+    Type: String
+    Default: hyc-
+  identifier:
+    Description: The identifier for resources
+    Type: String
+    Default: tf-state
+
+Resources:
+  s3Bucket:
+    Type: AWS::S3::Bucket
+    Properties: 
+      AccessControl: Private
+      BucketName: !Sub ${prefix}${identifier}-${AWS::AccountId}-${AWS::Region}
+      Tags:
+        - Key: CreatedBy
+          Value: Terrafrom
+
+  dynamodbTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - 
+          AttributeName: LockId
+          AttributeType: S
+      KeySchema:
+        - 
+          AttributeName: LockId
+          KeyType: HASH
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      TableName: !Sub ${prefix}${identifier}-${AWS::AccountId}-${AWS::Region}
+      Tags:
+        - Key: CreatedBy
+          Value: Terrafrom
