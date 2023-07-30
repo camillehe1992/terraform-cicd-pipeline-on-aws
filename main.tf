@@ -4,7 +4,7 @@ terraform {
     key            = "terraform/state/cicd-pipeline-on-aws.json"
     dynamodb_table = "hyc-tf-state-756143471679-cn-north-1"
     region         = "cn-north-1"
-    profile        = "756143471679_UserFull"
+    profile        = "automation_dev"
   }
 
   required_providers {

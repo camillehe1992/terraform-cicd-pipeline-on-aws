@@ -2,7 +2,7 @@ BASE := $(shell /bin/pwd)
 TF ?= terraform
 AWS ?= aws
 
-export AWS_PROFILE=756143471679_UserFull
+export AWS_PROFILE=automation_dev
 
 target:
 	$(info ${HELP_MESSAGE})
