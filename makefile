@@ -2,7 +2,7 @@ BASE := $(shell /bin/pwd)
 TF ?= terraform
 AWS ?= aws
 
-export AWS_PROFILE=automation_dev
+export AWS_PROFILE=app_deployment_dev
 
 target:
 	$(info ${HELP_MESSAGE})
@@ -14,7 +14,7 @@ create-stack:
 
 init:
 	$(info [*] Terraform Init)
-	@$(TF) init
+	@$(TF) init -reconfigure
 
 plan:
 	$(info [*] Terraform Plan )

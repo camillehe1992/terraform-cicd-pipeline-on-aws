@@ -6,8 +6,14 @@ variable "aws_region" {
   description = "AWS region"
 }
 
+variable "environment" {
+  type        = string
+  default     = "dev"
+  description = "Application Environment, such as dev, prod"
+}
+
 variable "aws_profile" {
   type        = string
-  default     = "automation_dev"
+  default     = "app_deployment_dev"
   description = "AWS profile which is used for the deployment"
 }

@@ -1,10 +1,9 @@
 terraform {
   backend "s3" {
-    bucket         = "hyc-tf-state-756143471679-cn-north-1"
-    key            = "cicd-pipeline-on-aws/state.json"
-    dynamodb_table = "hyc-tf-state-756143471679-cn-north-1"
-    region         = "cn-north-1"
-    profile        = "app_deployment_dev"
+    bucket  = "hyc-tf-state-756143471679-cn-north-1"
+    key     = "cicd-pipeline-on-aws/state.json"
+    region  = "cn-north-1"
+    profile = "app_deployment_dev"
   }
 
   required_providers {
@@ -22,6 +21,6 @@ provider "aws" {
 # A simple SNS topic resources 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic
 resource "aws_sns_topic" "user_updates" {
-  name              = "user-updates-topic"
+  name              = "${var.environment}-user-updates-topic"
   kms_master_key_id = "alias/aws/sns"
 }
