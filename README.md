@@ -1,2 +1,6 @@
-# terraform-cicd-pipeline-on-aws
-AWS with Terraform: Setting up an Integration for CI/CD Pipeline
+This repo provides GitHub Actions workflows that deploy AWS resources using Terraform.
+
+---
+
+## Reference
+- https://github.com/aws-actions/configure-aws-credentials

@@ -1,15 +1,24 @@
-name: Terraform Plan/Apply
+name: Terraform Deploy
 
 on:
   push:
     branches:
       - main
+      - dev
   pull_request:
     branches:
       - main
+      - dev
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to run against'
+        type: environment
+        required: true
 
 permissions:
   contents: read
+  pull-requests: write
 
 env:
   AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
@@ -47,7 +56,7 @@ jobs:
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -reconfigure
 
       # Checks that all Terraform configuration files adhere to a canonical format
       # Will fail the build if not
@@ -137,7 +146,7 @@ jobs:
 
       # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
       - name: Terraform Init
-        run: terraform init
+        run: terraform init -reconfigure
 
       # Download saved plan from artifacts
       - name: Download Terraform Plan

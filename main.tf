@@ -1,10 +1,10 @@
 terraform {
   backend "s3" {
     bucket         = "hyc-tf-state-756143471679-cn-north-1"
-    key            = "terraform/state/cicd-pipeline-on-aws.json"
+    key            = "cicd-pipeline-on-aws/state.json"
     dynamodb_table = "hyc-tf-state-756143471679-cn-north-1"
     region         = "cn-north-1"
-    profile        = "automation_dev"
+    profile        = "app_deployment_dev"
   }
 
   required_providers {
