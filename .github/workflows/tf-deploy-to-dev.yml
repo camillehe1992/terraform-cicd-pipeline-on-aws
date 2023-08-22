@@ -1,20 +1,15 @@
-name: Terraform Deploy
+name: Terraform Deploy to Dev
 
 on:
   push:
     branches:
-      - main
       - dev
   pull_request:
     branches:
-      - main
       - dev
   workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment to run against'
-        type: environment
-        required: true
+    branches:
+      - dev
 
 permissions:
   contents: read
@@ -113,7 +108,7 @@ jobs:
 
       # If this is a PR post the changes
       - name: Push Terraform Output to PR
-        if: github.ref != 'refs/heads/main'
+        if: github.ref != 'refs/heads/dev'
         uses: actions/github-script@v6
         env:
           SUMMARY: "${{ steps.tf-plan-string.outputs.summary }}"
