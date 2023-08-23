@@ -1,19 +1,12 @@
 name: Terraform Deploy to Prod
 
 on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
     branches:
       - main
 
 permissions:
   contents: read
-  pull-requests: write
 
 env:
   AWS_ACCESS_KEY_ID: "${{ secrets.AWS_ACCESS_KEY_ID }}"
