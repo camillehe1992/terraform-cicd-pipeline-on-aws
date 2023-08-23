@@ -2,7 +2,9 @@ BASE := $(shell /bin/pwd)
 TF ?= terraform
 AWS ?= aws
 
-export AWS_PROFILE=app_deployment_dev
+
+export ENV=prod
+export AWS_PROFILE=app_deployment_${ENV}
 
 target:
 	$(info ${HELP_MESSAGE})
@@ -14,11 +16,11 @@ create-stack:
 
 init:
 	$(info [*] Terraform Init)
-	@$(TF) init -reconfigure
+	@$(TF) init -reconfigure -backend-config=settings/${ENV}/backend.conf
 
 plan:
 	$(info [*] Terraform Plan )
-	@$(TF) plan -out tfplan
+	@$(TF) plan -var-file=settings/${ENV}/variables.tfvars -out tfplan
 
 apply:
 	$(info [*] Terraform Apply )

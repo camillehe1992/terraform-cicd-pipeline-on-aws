@@ -1,11 +1,5 @@
 terraform {
-  backend "s3" {
-    bucket  = "hyc-tf-state-756143471679-cn-north-1"
-    key     = "cicd-pipeline-on-aws/state.json"
-    region  = "cn-north-1"
-    profile = "app_deployment_dev"
-  }
-
+  backend "s3" {}
   required_providers {
     aws = {
       source  = "hashicorp/aws"
